@@ -1,0 +1,62 @@
+== README
+
+2015.09.23 
+
+Trying to build a Rails app to allow editing of the PostGIS database for use with Croatian Restaurants in Los Angeles project
+Maybe expand to a whole website
+
+Following http://guides.rubyonrails.org/getting_started.html
+except using PostgreSQL per http://ngauthier.com/2013/08/postgis-and-rails-a-simple-approach.html
+
+$ cd "/Users/gscar/Documents/GIS and Croatian Restaurants Project/Croatian Restaurants Project"
+[Do the following two lines first first or errors about pg installation when creating the new project. Maybe problems with rbenv?. But web shows lots of problems installing pg and I tried two or three before finding this one worked]
+$ sudo su 
+$ env ARCHFLAGS="-arch x86_64" gem install pg
+[in new Console window]
+$ cd "/Users/gscar/Documents/GIS and Croatian Restaurants Project/Croatian Restaurants Project"
+$ rails new croresrails -d postgresql
+$ cd croresrails
+$ bundle update
+[Edit config/application.rb per n gauthier. Not sure if I need this]
+rake db:create db:migrate [creates db/structure.sql]
+[Gauthier creates a test. I don't know how to do this, so move on]
+Gauthier: add PostGIS:
+
+$ rails generate migration enable_postgis
+Edit the migration (file given in messages), and write (really adding middle line):
+
+class EnablePostgis < ActiveRecord::Migration
+  def change
+    enable_extension :postgis
+  end
+end
+
+Now going back to guides to build the site
+========
+
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
+
+
+Please feel free to use a different markup language if you do not plan to run
+<tt>rake doc:app</tt>.
